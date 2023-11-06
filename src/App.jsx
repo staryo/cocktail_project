@@ -11,7 +11,7 @@ async function getCocktails(searchString, getResult) {
 }
 
 function App() {
-    const [request, updateRequest] = useState("margarita");
+    const [request, updateRequest] = useState("");
     const [serverResponse, updateServerResponse] = useState([]);
     useEffect(() => {
         getCocktails(request, updateServerResponse);
@@ -19,11 +19,11 @@ function App() {
     console.log(serverResponse);
     return (
         <>
-            <div className="row mb-3">
+            <div className="row">
                 <div className="col">
-                    <span className="h2"> Search: </span>
                     <input className="rounded-3 h2 p-2" value={request}
                            onChange={(e) => updateRequest(e.target.value)}
+                           placeholder="Cocktail name"
                     />
                 </div>
             </div>
