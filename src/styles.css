@@ -1,0 +1,21 @@
+:root {
+    font-size: 1em;
+}
+
+.box {
+    background: transparent;
+    backdrop-filter: blur(10px);
+}
+
+body {
+    background-size: cover;
+    background-position: center;
+}
+
+.display-linebreak {
+    white-space: pre-line;
+}
+
+textarea#no-resize {
+    resize: none;
+}
