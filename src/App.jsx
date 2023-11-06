@@ -27,12 +27,12 @@ function App() {
                     />
                 </div>
             </div>
-            <div className="row w-100 justify-content-center g-3 align-items-center">
+            <div className="row w-100 justify-content-center g-3 align-items-center m-0">
                 {
                     serverResponse.map(
                         (row) =>
                             <>
-                                <div className="col-5">
+                                <div className="col-4">
                                     <div className="row">
                                         <div className="col">
                                             <img src={row.strDrinkThumb} width="100%" alt={row.strDrink}/>
@@ -44,7 +44,7 @@ function App() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-7 text-start">
+                                <div className="col-8 text-start">
                                     {row.strInstructions}
                                     <Ingredients data={row}/>
                                 </div>
