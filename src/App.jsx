@@ -35,7 +35,7 @@ function App() {
                                 <div className="col-4">
                                     <div className="row">
                                         <div className="col">
-                                            <img src={row.strDrinkThumb} width="100%" alt={row.strDrink}/>
+                                            <img src={row.strDrinkThumb} width="100%" alt={row.strDrink} loading="lazy"/>
                                         </div>
                                     </div>
                                     <div className="row">
