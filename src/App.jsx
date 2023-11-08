@@ -11,11 +11,20 @@ async function getCocktails(searchString, getResult) {
 }
 
 function App() {
+    const [debouncedInputValue, setDebouncedInputValue] = useState("")
     const [request, updateRequest] = useState("");
     const [serverResponse, updateServerResponse] = useState([]);
+
     useEffect(() => {
-        getCocktails(request, updateServerResponse);
-    }, [request]);
+        const delayInputTimeoutId = setTimeout(() => {
+            setDebouncedInputValue(request);
+        }, 500);
+        return () => clearTimeout(delayInputTimeoutId);
+    }, [request, 500]);
+
+    useEffect(() => {
+        getCocktails(debouncedInputValue, updateServerResponse);
+    }, [debouncedInputValue]);
     console.log(serverResponse);
     return (
         <>
