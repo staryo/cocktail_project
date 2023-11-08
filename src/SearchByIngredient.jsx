@@ -6,15 +6,32 @@ import {Link} from "react-router-dom";
 
 async function getCocktails(searchString, getResult) {
     const response = await axios.get(
-        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + searchString
+        "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + searchString
     );
-    getResult(response.data.drinks || []);
+    if (response.data.drinks === undefined) {
+        getResult([]);
+        return;
+    }
+    const result = await Promise.all(
+        await response.data.drinks.slice(0, 20).map(async (drink) => {
+                const response = await axios.get(
+                    "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drink.idDrink
+                );
+                return await response.data.drinks[0];
+            }
+        )
+    );
+    await getResult(result || []);
 }
 
-function App() {
+function SearchByIngredient() {
     const [debouncedInputValue, setDebouncedInputValue] = useState("");
     const [request, updateRequest] = useState("");
     const [serverResponse, updateServerResponse] = useState([]);
+
+    useEffect(() => {
+        getCocktails(debouncedInputValue, updateServerResponse);
+    }, [debouncedInputValue]);
 
     useEffect(() => {
         const delayInputTimeoutId = setTimeout(() => {
@@ -23,17 +40,13 @@ function App() {
         return () => clearTimeout(delayInputTimeoutId);
     }, [request, 500]);
 
-    useEffect(() => {
-        getCocktails(debouncedInputValue, updateServerResponse);
-    }, [debouncedInputValue]);
-    console.log(serverResponse);
     return (
         <>
             <nav className="navbar bg-light">
-                <Link className="btn btn-outline-success me-2 active" to="/">
+                <Link className="btn btn-outline-success me-2" to="/">
                     Search cocktail by name
                 </Link>
-                <Link className="btn btn-outline-success me-2" to="/SearchByIngredient">
+                <Link className="btn btn-outline-success me-2 active" to="/SearchByIngredient">
                     Search cocktail by ingredient
                 </Link>
             </nav>
@@ -42,7 +55,7 @@ function App() {
                 <div className="col">
                     <input className="rounded-3 h2 p-2" value={request}
                            onChange={(e) => updateRequest(e.target.value)}
-                           placeholder="Cocktail name"
+                           placeholder="Ingredient name"
                     />
                 </div>
             </div>
@@ -69,4 +82,4 @@ function App() {
     );
 }
 
-export default App;
+export default SearchByIngredient;
