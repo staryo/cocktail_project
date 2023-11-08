@@ -11,7 +11,7 @@ async function getCocktails(searchString, getResult) {
 }
 
 function App() {
-    const [debouncedInputValue, setDebouncedInputValue] = useState("")
+    const [debouncedInputValue, setDebouncedInputValue] = useState("");
     const [request, updateRequest] = useState("");
     const [serverResponse, updateServerResponse] = useState([]);
 
