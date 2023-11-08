@@ -32,19 +32,12 @@ function App() {
                     serverResponse.map(
                         (row) =>
                             <>
-                                <div className="col-4">
-                                    <div className="row">
-                                        <div className="col">
-                                            <img src={row.strDrinkThumb} width="100%" alt={row.strDrink} loading="lazy"/>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col h1">
-                                            {row.strDrink}
-                                        </div>
-                                    </div>
+                                <div className="col-3">
+                                    <img src={row.strDrinkThumb} width="100%" alt={row.strDrink}
+                                         loading="lazy"/>
                                 </div>
-                                <div className="col-8 text-start">
+                                <div className="col-9 text-start">
+                                    <p className="h2">{row.strDrink}</p>
                                     {row.strInstructions}
                                     <Ingredients data={row}/>
                                 </div>
