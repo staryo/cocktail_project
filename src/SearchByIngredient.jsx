@@ -3,6 +3,8 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import Ingredients from "./Ingredients.jsx";
 import {Link} from "react-router-dom";
+import {Autocomplete, TextField} from "@mui/material";
+import AppNavBar from "./AppNavBar.jsx";
 
 async function getCocktails(searchString, getResult) {
     const response = await axios.get(
@@ -24,46 +26,61 @@ async function getCocktails(searchString, getResult) {
     await getResult(result || []);
 }
 
+async function getIngredients(getResult) {
+    const response = await axios.get(
+        "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+    );
+    getResult(response.data.drinks.map((row) => {
+        return row.strIngredient1;
+    }));
+}
+
 function SearchByIngredient() {
-    const [debouncedInputValue, setDebouncedInputValue] = useState("");
-    const [request, updateRequest] = useState("");
+    const [request, updateRequest] = useState("Gin");
+    const [ingredient, updateIngredient] = useState("");
     const [serverResponse, updateServerResponse] = useState([]);
+    const [serverResponseIngredients, updateServerResponseIngredients] = useState([]);
 
     useEffect(() => {
-        getCocktails(debouncedInputValue, updateServerResponse);
-    }, [debouncedInputValue]);
+        getIngredients(updateServerResponseIngredients);
+        // getCocktails(debouncedInputValue, updateServerResponse);
+    }, []);
 
     useEffect(() => {
-        const delayInputTimeoutId = setTimeout(() => {
-            setDebouncedInputValue(request);
-        }, 500);
-        return () => clearTimeout(delayInputTimeoutId);
-    }, [request, 500]);
+        getCocktails(request, updateServerResponse);
+    }, [request]);
 
     return (
         <>
-            <nav className="navbar bg-light">
-                <Link className="btn btn-outline-success me-2" to="/">
-                    Search cocktail by name
-                </Link>
-                <Link className="btn btn-outline-success me-2 active" to="/SearchByIngredient">
-                    Search cocktail by ingredient
-                </Link>
-            </nav>
-
+            <AppNavBar active="ingredient"/>
             <div className="row">
                 <div className="col">
-                    <input className="rounded-3 h2 p-2" value={request}
-                           onChange={(e) => updateRequest(e.target.value)}
-                           placeholder="Ingredient name"
+                    <Autocomplete
+                        id="combo-box-demo"
+                        options={serverResponseIngredients}
+                        className="rounded-3 h2 p-2 w-100"
+                        value={request}
+                        onChange={(event, newValue) => {
+                            updateRequest(newValue);
+                        }}
+                        inputValue={ingredient}
+                        onInputChange={(event, newInputValue) => {
+                            updateIngredient(newInputValue);
+                        }} renderInput={(params) =>
+                        <TextField
+                            {...params}
+                            label="Ingredient name"
+
+                        />
+                    }
                     />
                 </div>
             </div>
             <div className="row w-100 justify-content-center g-3 align-items-center m-0">
                 {
                     serverResponse.map(
-                        (row) =>
-                            <>
+                        row => (
+                            <div key={row.strDrink}>
                                 <div className="col-3">
                                     <img src={`${row.strDrinkThumb}/preview`} width="100%" alt={row.strDrink}
                                          loading="lazy"/>
@@ -73,7 +90,8 @@ function SearchByIngredient() {
                                     {row.strInstructions}
                                     <Ingredients data={row}/>
                                 </div>
-                            </>
+                            </div>
+                        )
                     )
                 }
             </div>

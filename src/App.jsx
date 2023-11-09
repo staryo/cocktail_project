@@ -3,6 +3,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import Ingredients from "./Ingredients.jsx";
 import {Link} from "react-router-dom";
+import AppNavBar from "./AppNavBar.jsx";
 
 async function getCocktails(searchString, getResult) {
     const response = await axios.get(
@@ -13,7 +14,7 @@ async function getCocktails(searchString, getResult) {
 
 function App() {
     const [debouncedInputValue, setDebouncedInputValue] = useState("");
-    const [request, updateRequest] = useState("");
+    const [request, updateRequest] = useState('');
     const [serverResponse, updateServerResponse] = useState([]);
 
     useEffect(() => {
@@ -26,17 +27,9 @@ function App() {
     useEffect(() => {
         getCocktails(debouncedInputValue, updateServerResponse);
     }, [debouncedInputValue]);
-    console.log(serverResponse);
     return (
         <>
-            <nav className="navbar bg-light">
-                <Link className="btn btn-outline-success me-2 active" to="/">
-                    Search cocktail by name
-                </Link>
-                <Link className="btn btn-outline-success me-2" to="/SearchByIngredient">
-                    Search cocktail by ingredient
-                </Link>
-            </nav>
+            <AppNavBar active="name"/>
 
             <div className="row">
                 <div className="col">
@@ -51,7 +44,7 @@ function App() {
                     serverResponse.map(
                         (row) =>
                             <>
-                                <div className="col-3">
+                                <div key={row.strDrink} className="col-3">
                                     <img src={`${row.strDrinkThumb}/preview`} width="100%" alt={row.strDrink}
                                          loading="lazy"/>
                                 </div>

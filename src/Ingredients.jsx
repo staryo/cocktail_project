@@ -8,11 +8,11 @@ export default function Ingredients({data}) {
                         const amount = data[`strMeasure${number + 1}`];
                         if (!!ingredient && !!amount) {
                             return (
-                                <>
+                                <div key={ingredient}>
                                     <li>
                                         {`${ingredient} (${amount})`}
                                     </li>
-                                </>
+                                </div>
                             );
                         }
                     })
