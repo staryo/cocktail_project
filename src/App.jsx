@@ -31,7 +31,7 @@ function App() {
         <>
             <AppNavBar active="name"/>
 
-            <div className="row w-100">
+            <div className="row w-100 justify-content-center g-3 align-items-center m-0">
                 <div className="col-12">
                     <TextField className="w-100" value={request}
                            onChange={(e) => updateRequest(e.target.value)}

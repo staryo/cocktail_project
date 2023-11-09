@@ -52,7 +52,7 @@ function SearchByIngredient() {
     return (
         <>
             <AppNavBar active="ingredient"/>
-            <div className="row w-100 m-1">
+            <div className="row w-100 justify-content-center g-3 align-items-center m-0">
                 <div className="col">
                     <Autocomplete
                         id="combo-box-demo"
