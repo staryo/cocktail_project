@@ -80,7 +80,7 @@ function SearchByIngredient() {
                 {
                     serverResponse.map(
                         row => (
-                            <div key={row.strDrink}>
+                            <>
                                 <div className="col-3">
                                     <img src={`${row.strDrinkThumb}/preview`} width="100%" alt={row.strDrink}
                                          loading="lazy"/>
@@ -90,7 +90,7 @@ function SearchByIngredient() {
                                     {row.strInstructions}
                                     <Ingredients data={row}/>
                                 </div>
-                            </div>
+                            </>
                         )
                     )
                 }
