@@ -57,7 +57,7 @@ function SearchByIngredient() {
                     <Autocomplete
                         id="combo-box-demo"
                         options={serverResponseIngredients}
-                        className="rounded-3 h2 p-2 w-100"
+                        className="w-100"
                         value={request}
                         onChange={(event, newValue) => {
                             updateRequest(newValue);

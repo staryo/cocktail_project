@@ -3,6 +3,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import Ingredients from "./Ingredients.jsx";
 import AppNavBar from "./AppNavBar.jsx";
+import {TextField} from "@mui/material";
 
 async function getCocktails(searchString, getResult) {
     const response = await axios.get(
@@ -32,9 +33,9 @@ function App() {
 
             <div className="row">
                 <div className="col">
-                    <input className="rounded-3 h2 p-2" value={request}
+                    <TextField className="w-100" value={request}
                            onChange={(e) => updateRequest(e.target.value)}
-                           placeholder="Cocktail name"
+                           label="Cocktail name"
                     />
                 </div>
             </div>

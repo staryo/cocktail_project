@@ -1,20 +1,25 @@
 import {Link} from "react-router-dom";
+import {Button} from "@mui/material";
 
 export default function AppNavBar({active}) {
     return (
         <nav className="navbar justify-content-center">
-            <Link
-                className={`btn btn-outline-success me-2 ${active === 'name'? "active": ""}`}
-                to="/"
+            <Button
+                component={Link}
+                to={"/"}
+                className="m-2"
+                variant={`${active === "name" ? "contained" : "outlined"}`}
             >
                 By name
-            </Link>
-            <Link
-                className={`btn btn-outline-success me-2 ${active === 'ingredient'? "active": ""}`}
-                to="/SearchByIngredient"
+            </Button>
+            <Button
+                component={Link}
+                to={"/SearchByIngredient"}
+                className="m-2"
+                variant={`${active === "ingredient" ? "contained" : "outlined"}`}
             >
                 By ingredient
-            </Link>
+            </Button>
         </nav>
     );
 }
