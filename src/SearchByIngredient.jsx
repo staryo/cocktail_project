@@ -52,12 +52,11 @@ function SearchByIngredient() {
     return (
         <>
             <AppNavBar active="ingredient"/>
-            <div className="row">
+            <div className="row w-100 m-1">
                 <div className="col">
                     <Autocomplete
                         id="combo-box-demo"
                         options={serverResponseIngredients}
-                        className="w-100"
                         value={request}
                         onChange={(event, newValue) => {
                             updateRequest(newValue);

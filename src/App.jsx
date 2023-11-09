@@ -22,7 +22,7 @@ function App() {
             setDebouncedInputValue(request);
         }, 500);
         return () => clearTimeout(delayInputTimeoutId);
-    }, [request, 500]);
+    }, [request]);
 
     useEffect(() => {
         getCocktails(debouncedInputValue, updateServerResponse);
@@ -31,8 +31,8 @@ function App() {
         <>
             <AppNavBar active="name"/>
 
-            <div className="row">
-                <div className="col">
+            <div className="row w-100">
+                <div className="col-12">
                     <TextField className="w-100" value={request}
                            onChange={(e) => updateRequest(e.target.value)}
                            label="Cocktail name"
