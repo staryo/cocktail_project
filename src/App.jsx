@@ -2,7 +2,6 @@ import "./App.css";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import Ingredients from "./Ingredients.jsx";
-import {Link} from "react-router-dom";
 import AppNavBar from "./AppNavBar.jsx";
 
 async function getCocktails(searchString, getResult) {
@@ -14,7 +13,7 @@ async function getCocktails(searchString, getResult) {
 
 function App() {
     const [debouncedInputValue, setDebouncedInputValue] = useState("");
-    const [request, updateRequest] = useState('');
+    const [request, updateRequest] = useState("");
     const [serverResponse, updateServerResponse] = useState([]);
 
     useEffect(() => {

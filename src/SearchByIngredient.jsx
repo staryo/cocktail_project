@@ -2,7 +2,6 @@ import "./App.css";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import Ingredients from "./Ingredients.jsx";
-import {Link} from "react-router-dom";
 import {Autocomplete, TextField} from "@mui/material";
 import AppNavBar from "./AppNavBar.jsx";
 
