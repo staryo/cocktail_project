@@ -58,6 +58,7 @@ function SearchByIngredient() {
                         id="combo-box-demo"
                         options={serverResponseIngredients}
                         value={request}
+                        groupBy={(option) => option[0]}
                         onChange={(event, newValue) => {
                             updateRequest(newValue);
                         }}
