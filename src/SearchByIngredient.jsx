@@ -31,7 +31,7 @@ async function getIngredients(getResult) {
     );
     getResult(response.data.drinks.map((row) => {
         return row.strIngredient1;
-    }));
+    }).sort());
 }
 
 function SearchByIngredient() {
