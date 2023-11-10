@@ -75,25 +75,23 @@ function SearchByIngredient() {
                     />
                 </div>
             </div>
-            <div className="row w-100 justify-content-center g-3 align-items-center m-0">
-                {
-                    serverResponse.map(
-                        row => (
-                            <>
-                                <div className="col-3">
-                                    <img src={`${row.strDrinkThumb}/preview`} width="100%" alt={row.strDrink}
-                                         loading="lazy"/>
-                                </div>
-                                <div className="col-9 text-start">
-                                    <p className="h2">{row.strDrink}</p>
-                                    {row.strInstructions}
-                                    <Ingredients data={row}/>
-                                </div>
-                            </>
-                        )
+            {
+                serverResponse.map(
+                    row => (
+                        <div key={row.strDrink} className="row w-100 justify-content-center g-3 align-items-center m-0">
+                            <div className="col-3">
+                                <img src={`${row.strDrinkThumb}/preview`} width="100%" alt={row.strDrink}
+                                     loading="lazy"/>
+                            </div>
+                            <div className="col-9 text-start">
+                                <p className="h2">{row.strDrink}</p>
+                                {row.strInstructions}
+                                <Ingredients data={row}/>
+                            </div>
+                        </div>
                     )
-                }
-            </div>
+                )
+            }
 
         </>
     );

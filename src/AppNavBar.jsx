@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import {Button} from "@mui/material";
 
 export default function AppNavBar({active}) {
+
     return (
         <nav className="navbar justify-content-center">
             <Button
