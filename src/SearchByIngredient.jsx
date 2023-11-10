@@ -55,7 +55,7 @@ function SearchByIngredient() {
             <div className="row w-100 justify-content-center g-3 align-items-center m-0">
                 <div className="col">
                     <Autocomplete
-                        id="combo-box-demo"
+                        fullWidth
                         options={serverResponseIngredients}
                         value={request}
                         groupBy={(option) => option[0]}
@@ -69,9 +69,7 @@ function SearchByIngredient() {
                         <TextField
                             {...params}
                             label="Ingredient name"
-
-                        />
-                    }
+                        />}
                     />
                 </div>
             </div>

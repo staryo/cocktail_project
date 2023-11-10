@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import Ingredients from "./Ingredients.jsx";
 import AppNavBar from "./AppNavBar.jsx";
 import {TextField} from "@mui/material";
+import {Clear} from "@mui/icons-material";
 
 async function getCocktails(searchString, getResult) {
     const response = await axios.get(
@@ -33,9 +34,12 @@ function App() {
 
             <div className="row w-100 justify-content-center g-3 align-items-center m-0">
                 <div className="col-12">
-                    <TextField className="w-100" value={request}
-                               onChange={(e) => updateRequest(e.target.value)}
-                               label="Cocktail name"
+                    <TextField
+                        value={request}
+                        type="search"
+                        fullWidth
+                        onChange={(e) => updateRequest(e.target.value)}
+                        label="Cocktail name"
                     />
                 </div>
             </div>
